@@ -11,11 +11,11 @@ object TP2Ex1:
   def valueInTable(t: Table, s: String): Int = t(s)
 
   /* Définissez la table vide (qui associe zéro à chaque mot) */
-  def emptyTable: Table = ???
+  def emptyTable: Table = (x : String) => 0;
 
   /* Définissez une fonction pour créer une nouvelle table, qui associe la valeur n à la chaîne s, et qui est similaire
    * à t pour toutes les autres chaînes. */
-  def updateTable(t: Table, s: String, n: Int): Table = ???
+  def updateTable(t: Table, s: String, n: Int): Table = (x : String) => if (x==s) then n else t(s);
 
 
 object TP2Ex2:
@@ -29,11 +29,11 @@ object TP2Ex2:
   def elem(x: Int, s: IntSet): Boolean = s(x)
 
   /* Définir les ensembles vide et singleton, ainsi que les opérations ensemblistes suivantes. */
-  def emptySet: IntSet = ???
+  def emptySet: IntSet = (x: Int) => false;
 
-  def singleton(n: Int): IntSet = ???
+  def singleton(n: Int): IntSet = (x : Int) => if (n==x) then true else false ;
 
-  def union(s1: IntSet, s2: IntSet): IntSet = ???
+  def union(s1: IntSet, s2: IntSet): IntSet = (x : Int) => if (s1(x) != s2(x)) then true else false;
 
   def intersection(s1: IntSet, s2: IntSet): IntSet = ???
 
