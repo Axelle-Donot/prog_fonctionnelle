@@ -33,7 +33,7 @@ object TP2Ex2:
 
   def singleton(n: Int): IntSet = (x : Int) => if (n==x) then true else false ;
 
-  def union(s1: IntSet, s2: IntSet): IntSet = (x : Int) => if (s1(x) != s2(x)) then true else false;
+  def union(s1: IntSet, s2: IntSet): IntSet = (x : Int) => if (s1(x) == s2(x)) then true else false;
 
   def intersection(s1: IntSet, s2: IntSet): IntSet = ???
 
