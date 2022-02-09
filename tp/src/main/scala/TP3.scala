@@ -10,23 +10,49 @@ object TP3Ex1:
    * sanguins. */
 
   /* Remplacez cette déclaration de type par une définition utilisant 'enum'*/
-  type BloodGroup = Nothing
+  enum ABO :
+    case A
+    case B
+    case O
+    case AB
+
+  enum Rhesus :
+    case +
+    case -
+
+  enum BloodGroup :
+    case Groupe (abo : ABO, rhesus : Rhesus)
+
 
   /* Complétez la fonction suivante */
   def valueOf(s: String): BloodGroup = s match
-    case "A+" => ???
-    case "B+" => ???
-    case "AB+" => ???
-    case "O+" => ???
-    case "A-" => ???
-    case "B-" => ???
-    case "AB-" => ???
-    case "O-" => ???
+    case "A+" => BloodGroup.Groupe(ABO.A,Rhesus.+);
+    case "B+" => BloodGroup.Groupe(ABO.B,Rhesus.+);
+    case "AB+" => BloodGroup.Groupe(ABO.AB,Rhesus.+);
+    case "O+" => BloodGroup.Groupe(ABO.O,Rhesus.+);
+    case "A-" => BloodGroup.Groupe(ABO.A,Rhesus.-);
+    case "B-" => BloodGroup.Groupe(ABO.B,Rhesus.-);
+    case "AB-" => BloodGroup.Groupe(ABO.AB,Rhesus.-);
+    case "O-" => BloodGroup.Groupe(ABO.O,Rhesus.-);
     case _ => throw new IllegalArgumentException
 
   /* Définissez une fonction qui retourne 'true' si et seulement si la transfusion de sang de type 'donor' est possible
    * pour un receveur de type 'recipient' (cf. https://fr.wikipedia.org/wiki/Groupe_sanguin#Compatibilit%C3%A9) */
-  def compatible(donor: BloodGroup, recipient: BloodGroup): Boolean = ???
+  def compatibleABO (donor : BloodGroup, recipient : BloodGroup ) : Boolean = (donor, recipient) match
+    case (ABO.A, ABO.A) => true
+    case (ABO.B, ABO.B) => true
+    case (ABO.O, ABO.O) => true
+    case ( _ , ABO.AB) => true
+    case (ABO.O, _) => true
+    case _ => false
+
+
+  def compatibleRhesus (donor : BloodGroup, recipient : BloodGroup ) : Boolean = (donor, recipient) match
+    case (Rhesus.+, Rhesus.-) => false;
+    case - => true;
+
+  def compatible(donor: BloodGroup, recipient: BloodGroup): Boolean = (donor, recipient) match
+    case (BloodGroup.Group(a, b), BloodGroup.Group(x, y)) => ABOcompatible(a, x) && RHESUScompatible(b, y)
 
 
 object TP3Ex2:
