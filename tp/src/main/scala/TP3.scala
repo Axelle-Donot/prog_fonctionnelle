@@ -80,24 +80,33 @@ object TP3Ex3:
    * - x :: xs (avec x: A et xs: List[A]) */
 
   /* Retourne la longueur de la liste */
-  def length(l: List[Any]): Int = ???
+  def length(l: List[Any]): Int = l match
+    case Nil => 0
+    case _ :: xs => length(xs)+1
+
 
   /* Retourne 'true ' si et seulement si x est contenu dans l */
-  def elem[A](x: A, l: List[A]): Boolean = ???
+  def elem[A](x: A, l: List[A]): Boolean = l match
+    case Nil => 0;
+    case _ :: xs =>
 
   /* Retourne la liste l privée de la première occurrence de l'élément a (si l'élément n'est pas présent, retourne une
    * une liste identique à l) */
   def remove[A](a: A, l: List[A]): List[A] = ???
 
   /* Retourne la concaténation de l1 et l2 */
-  def append[A](l1: List[A], l2: List[A]): List[A] = ???
+  def append[A](l1: List[A], l2: List[A]): List[A] = (l1,l2) match
+    case (Nil, _ ) => l2
+    case (_, Nil) => l1
+    case ( x::xs, _ ) => x :: append(xs,l2)
+
 
   /* Créé une liste contenant exactement n fois l'élément x */
   def replicate[A](x: A, n: Int): List[A] =
     if n < 0 then
       throw new IllegalArgumentException("negative integer")
     else
-      ???
+      val l2 = x + replicate(x,n-1);
 
   /* Retourne 'true' si et seulement si la liste ne contient pas deux fois le même élément */
   def unique(l: List[Any]): Boolean = ???
