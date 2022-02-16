@@ -39,7 +39,15 @@ object TP1Ex1:
   def binaryString(n: Int): String = ???
 
   /* Définissez une fonction qui calcule le PGCD de deux nombres, en vous basant sur l'algorithme d'Euclide */
-  def gcd(a: Int, b: Int): Int = ???
+  def gcd(a: Int, b: Int): Int = {
+    if (a==0){
+      0
+    }else if (b==0){
+      a.abs
+    } else {
+      gcd (b,a%b).abs
+    }
+  }
 
   @main def mainTP1Ex1 =
     println("Hello, world!")
