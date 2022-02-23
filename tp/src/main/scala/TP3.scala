@@ -38,18 +38,18 @@ object TP3Ex1:
 
   /* Définissez une fonction qui retourne 'true' si et seulement si la transfusion de sang de type 'donor' est possible
    * pour un receveur de type 'recipient' (cf. https://fr.wikipedia.org/wiki/Groupe_sanguin#Compatibilit%C3%A9) */
-  def compatibleABO (donor : BloodGroup, recipient : BloodGroup ) : Boolean = (donor, recipient) match
+  def compatibleABO (donor : ABO, recipient : ABO ) : Boolean = (donor, recipient) match
     case (ABO.O, _ ) => true
     case ( _ , ABO.AB) => true
     case _ => donor==recipient
 
 
-  def compatibleRhesus (donor : BloodGroup, recipient : BloodGroup ) : Boolean = (donor, recipient) match
+  def compatibleRhesus (donor : Rhesus, recipient : Rhesus ) : Boolean = (donor, recipient) match
     case (Rhesus.+, Rhesus.-) => false;
     case _ => true;
 
   def compatible(donor: BloodGroup, recipient: BloodGroup): Boolean = (donor, recipient) match
-    case (BloodGroup.Group(a, b), BloodGroup.Group(x, y)) => ABOcompatible(a, x) && RHESUScompatible(b, y)
+    case (BloodGroup.Groupe(a, b), BloodGroup.Groupe(x, y)) => compatibleABO(a, x) && compatibleRhesus(b, y)
 
 
 object TP3Ex2:
@@ -66,8 +66,8 @@ object TP3Ex2:
   def eval(e: ArithExpr): Double = e match {
     case ArithExpr.Constant(v) => v;
     case ArithExpr.Neg(e) => -eval(e);
-    case ArithExpr.add(e1,e2) => eval(e1) + eval(e2);
-    case ArithExpr.sub(e1,e2) => eval(e1) - eval(e2);
+    case ArithExpr.Add(e1,e2) => eval(e1) + eval(e2);
+    case ArithExpr.Sub(e1,e2) => eval(e1) - eval(e2);
     case ArithExpr.Mult(e1,e2) => eval(e1) * eval(e2);
   }
 
@@ -86,9 +86,7 @@ object TP3Ex3:
 
 
   /* Retourne 'true ' si et seulement si x est contenu dans l */
-  def elem[A](x: A, l: List[A]): Boolean = l match
-    case Nil => 0;
-    case _ :: xs =>
+  def elem[A](x: A, l: List[A]): Boolean = ??? 
 
   /* Retourne la liste l privée de la première occurrence de l'élément a (si l'élément n'est pas présent, retourne une
    * une liste identique à l) */
@@ -106,7 +104,7 @@ object TP3Ex3:
     if n < 0 then
       throw new IllegalArgumentException("negative integer")
     else
-      val l2 = x + replicate(x,n-1);
+      ???
 
   /* Retourne 'true' si et seulement si la liste ne contient pas deux fois le même élément */
   def unique(l: List[Any]): Boolean = ???

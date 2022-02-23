@@ -35,7 +35,7 @@ object TP4Ex1:
    */
   class DoubleListQueue[A](front: List[A] = Nil, rear: List[A] = Nil) extends Queue[A]:
 
-    override def enqueue(a: A): Queue[A] = new ListQueue[A](front :: rear.reverse)
+    override def enqueue(a: A): Queue[A] = ???
 
     override def dequeue(): Queue[A] = ???
 
@@ -58,7 +58,7 @@ object TP4Ex2:
 
     override def add(a: A): Set[A] = new ListSet(a :: l)
 
-    override def remove(a: A): Set[A] = val r = Nil
+    override def remove(a: A): Set[A] = ???
 
   /* Nous allons définir une implémentation plus efficace spécialement pour les types qui héritent du trait Ordered
    * (sur lesquels on peut utiliser les comparaisons <, <=, >= et >) basées sur un arbre binaire de recherche.
@@ -96,7 +96,7 @@ object TP4Ex3:
   /* Définissez la classe Fraction qui implémente Ordered. */
   class Fraction(val num: Int, val denum: Int) extends Ordered[Fraction]:
 
-    def negate(): Fraction = new Fraction(-num,denom)
+    def negate(): Fraction = new Fraction(-num,denum)
 
     def invert(): Fraction = new Fraction(denum,num)
 
@@ -128,7 +128,7 @@ object TP4Ex3:
       }
 
     /* compare doit être compatible avec l'égalité: this.compare(that) retourne 0 si et seulement si this == that */
-    override def equals(obj: Any): Boolean = that.compare()==0
+    override def equals(obj: Any): Boolean = ???
 
     /* deux objets égaux doivent avoir le même hashCode */
     override def hashCode(): Int = ???
