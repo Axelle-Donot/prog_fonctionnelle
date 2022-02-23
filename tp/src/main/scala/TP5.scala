@@ -6,7 +6,16 @@ object TP5Ex1:
     if l.isEmpty then 0.0 else l.sum / l.length
 
   /* Définissez une fonction qui effectue le même calcul, en ne traversant la liste qu'une seule fois. */
-  def onePassAverage(l: List[Double]): Double = ???
+  def onePassAverage(l: List[Double]): Double = l match {
+    case Nil => 0
+    case _ => onePassAverageAux(l,0,0)
+  }
+
+
+  def onePassAverageAux(l : List[Double], n : Int, sum : Double): Double = l match {
+    case Nil => sum / n
+    case x :: xs => onePassAverageAux(xs, n + 1,sum + x)
+  }
 
   @main def mainTP5Ex1 =
     val r = scala.util.Random
@@ -27,7 +36,11 @@ object TP5Ex1:
 object TP5Ex2:
 
   /* Définissez une fonction récursive terminale pour calculer la factorielle d'un nombre. */
-  def tailRecursiveFactorial(n: BigInt): BigInt = ???
+  def tailRecursiveFactorial(n: BigInt): BigInt = tailAux(n,1)
+
+  def tailAux(n : BigInt,facPres : BigInt): BigInt = {
+    if n==1 then facPres else tailAux(n-1,facPres*n)
+  }
 
   @main def mainTP5Ex2 =
     val n = 2000
@@ -51,6 +64,14 @@ object TP5Ex3:
    * Quelle est sa complexité? Quelle est la complexité de la version définie dans le TP3? */
   def optimizedReverse[A](l: List[A]): List[A] = ???
 
+
+  def optimizedReverseAux[A](l : List[A], l2 : List[A]) : List[A] = l match {
+    case Nil => l2
+    case x :: xs => optimizedReverseAux(xs,x :: l2)
+  }
+
+
+
   @main def mainTP5Ex3 =
     val r = scala.util.Random
     val l = List.tabulate(4000)(identity)
@@ -73,13 +94,21 @@ object TP5Ex4:
   def naiveFibonacci(n: Int): Int =
     if n < 0 then
       throw new IllegalArgumentException("negative integer")
-    else if n < 2 then
-      n
+    else if n == 1 then
+      1
+    else if n == 0 then
+      0
     else
       naiveFibonacci(n - 1) + naiveFibonacci(n - 2)
 
   /* Définissez une fonction de complexité linéaire pour calculer le même résultat. */
-  def optimizedFibonacci(n: Int): Int = ???
+  def optimizedFibonacci(n: Int): Int = FibAux(n,0,1)
+
+  def FibAux(n : Int , a : Int , b:Int) : Int = n match {
+    case 0 => a
+    case 1 => b
+    case _ => FibAux(n-1 , b , a+b)
+  }
 
   @main def mainTP5Ex4 =
     val n = 42
@@ -105,8 +134,9 @@ object TP5Ex5:
   def fastExponentiation(b: BigInt, n: Int): BigInt =
     if n < 0 then
       throw new IllegalArgumentException("negative integer")
-    else
-      ???
+    else if
+      n == 1 then b
+    else fastExponentiation(b,n/2) * fastExponentiation(b, n/2)
 
   @main def mainTP5Ex5 =
     val b = 3

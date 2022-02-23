@@ -18,7 +18,7 @@ object TP1Ex1:
     if n < 0 then
       throw new IllegalArgumentException("negative integer")
     else
-      ???
+      factorial(n-1) * n
 
   /* Définissez l'exponentiation à l'aide d'une fonction récursive */
   def power(b: BigInt, n: Int): BigInt =
