@@ -13,7 +13,8 @@ object TP6Ex1:
    * et si on remplace le premier argument par double(2)?
    *
    * Écrivez un main pour vérifier vos prédictions.
-   */
+  */
+
   def eagerExample(n: Int, m: Int): Int =
     if n * n > 5 then m else 0
 
@@ -35,9 +36,10 @@ object TP6Ex2:
   /* Définissez les fonctions booléennes suivantes, qui se comportent comme les opérateurs "court-circuits" && et ||
      (c'est-à-dire que le deuxième argument de l'opérateur ne doit pas être évalué si sa valeur n'est pas nécessaire).
      La définition n'utilisera pas les opérateurs && et || */
-  def lazyAnd(l: Boolean, r: Boolean): Boolean = ???
+  def lazyAnd(l: Boolean, r: => Boolean): Boolean =
+    if l then r else false
 
-  def lazyOr(l: Boolean, r: Boolean) = ???
+  def lazyOr(l: Boolean, r: Boolean) = if l then l else r
 
 object TP6Ex3:
 
@@ -67,10 +69,16 @@ object TP6Ex4:
   /* Définissez les fonctions suivantes sur les streams */
 
   /* Renvoie vrai si et seulement si l'élément v est contenu dans le stream s */
-  def findValue[A](a: A, s: LazyList[A]): Boolean = ???
+  def findValue[A](a: A, s: LazyList[A]): Boolean = s match {
+    case LazyList() => false
+    case x #:: y => if x == a then true else findValue(a, y)
+  }
 
   /* Étant donné un stream s = [x0, x1, x2...], differenceStream renvoie le stream [x1-x0, x2-x1, , x3-x2...] */
-  def differenceStream(s: LazyList[Double]): LazyList[Double] = ???
+  def differenceStream(s: LazyList[Double]): LazyList[Double] = s match {
+    case LazyList() => ???
+    case x #:: y => ???
+  }
 
   /* Étant donné un stream s = [x0, x1, x2...], mapStream(f) renvoie le stream [f(x0), f(x1), , f(x2)...] */
   def mapStream[A,B](s: LazyList[A], f: A => B): LazyList[B] = ???
